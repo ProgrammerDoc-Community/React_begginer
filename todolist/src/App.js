@@ -2,6 +2,8 @@ import logo from './logo.svg';
 import React,{useContext, useEffect, useState} from 'react'
 import {AiOutlineDelete} from 'react-icons/ai'
 import './App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { isCompositeComponent } from 'react-dom/test-utils';
 // import React,{useState} from 'react';
 import TodoList from './RonLearning/todosample';

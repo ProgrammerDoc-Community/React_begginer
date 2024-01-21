@@ -1,10 +1,10 @@
-body{
+/* body{
 
   background-color: #1f1e1e;
   color: white;
   overflow: hidden;
 
-}
+} */
 /* h1{
   text-align: center;
 }
@@ -135,3 +135,19 @@ body{
 } */ 
 
 
+
+.formdata{
+  display: flex;
+  flex-direction: column;
+}
+
+.formdata :focus{
+  outline: 2px solid rgb(112, 190, 76);
+  outline-style: hidden;
+
+}
+
+.InputItem{
+  display: flex;
+  padding: 1px;
+}
