@@ -4,35 +4,35 @@ import {AiOutlineDelete} from 'react-icons/ai'
 import './App.css';
 import { isCompositeComponent } from 'react-dom/test-utils';
 // import React,{useState} from 'react';
+import TodoList from './RonLearning/todosample';
 
 function App() {
-  const [isCompleteScreen,setIsCompleteScreen]=useState(false)
-  const [allTodos,setTodos]= useState([]);
-  const [newTitle,setNewTitle]=useState("")
-  const [newDescription,setNewDescription]=useState("")
-  const handleAddTodo =()=>{
-    let newTodoItem = {
-      title:newTitle,
-      description:newDescription
-    }
+  // const [isCompleteScreen,setIsCompleteScreen]=useState(false)
+  // const [allTodos,setTodos]= useState([]);
+  // const [newTitle,setNewTitle]=useState("")
+  // const [newDescription,setNewDescription]=useState("")
+  // const handleAddTodo =()=>{
+  //   let newTodoItem = {
+  //     title:newTitle,
+  //     description:newDescription
+  //   }
 
-    let updatedTodoArr = [...allTodos];
-    updatedTodoArr.push(newTodoItem);
-    setTodos(updatedTodoArr);
-    localStorage.setItem('todolist',JSON.stringify(updatedTodoArr))
-  }
+  //   let updatedTodoArr = [...allTodos];
+  //   updatedTodoArr.push(newTodoItem);
+  //   setTodos(updatedTodoArr);
+  //   localStorage.setItem('todolist',JSON.stringify(updatedTodoArr))
+  // }
 
-  useEffect(()=>{
-    let savedTodo=JSON.parse(localStorage.getItem('todolist'));
-    if(savedTodo){
-      setTodos(savedTodo);
-    }
+  // useEffect(()=>{
+  //   let savedTodo=JSON.parse(localStorage.getItem('todolist'));
+  //   if(savedTodo){
+  //     setTodos(savedTodo);
+  //   }
 
-  },[])
+  // },[])
   return (
     <div className="App">
-      <h1>Yika Todos</h1>
-      <div className='todo-wrapper'>
+      {/* <div className='todo-wrapper'>
         <div className='todo-input'>
           <div className='todo-input-item'>
             <label>Title</label>
@@ -57,16 +57,13 @@ function App() {
               <h3>{item.title} </h3>
               <p>{item.description}</p>
             </div>
-            /* <div>
-              <AiOutlineDelete className="icon"/>
-              <button className="check-icon">D</button>
-            </div> */
             );
           }
             )
           }
         </div>
-      </div>
+      </div> */}
+      <TodoList/>
     </div>
   );
 }
