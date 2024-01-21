@@ -11,12 +11,16 @@ class TodoList extends Component{
     }
     EventChange=(event)=>{
         this.setState({
-            [event.target.task]:event.target.value,
-            [event.target.details]:event.target.value
+            [event.target.name]:event.target.value,
         })
 
     }
+
+    EventSubmit=()=>{
+        console.log("my task is ",this.state.task, "and ", this.state.details)
+    }
     render(){
+        const { task,details} = this.state
         return(
             <div className="TodoContainer container  mt-5 p-5">
                 <div className="heading ">
@@ -24,24 +28,24 @@ class TodoList extends Component{
                 </div>
                 <div className="todocontent">
                     <div className="inputcontainer card">
-                        <form className="form " onSubmit={this.EventChange}> 
+                        <form className="form " > 
                             <div className=" formdata form-group mt-3 mb-3">
                                 <label>Task</label>
-                                <input name="task" type="text" placeholder="enter a task" className="InputItem"/>
+                                <input name="task" value={task} type="text" onChange={this.EventChange} placeholder="enter a task" className="InputItem"/>
                             </div>
                             <div className=" formdata form-group mt-3 mb-3">
                                 <label>Details</label>
-                                <input type="text" className="InputItem" placeholder="enter a task"/>
+                                <input type="text" name="details" value={details} onChange={this.EventChange} className="InputItem" placeholder="enter a task"/>
                             </div>
                             <div className="btnMian" >
-                                <button type="submit" name="details" className="btn btn-primary mt-3 mb-5">Add</button>
+                                <button type="submit" onSubmit={this.EventSubmit}  className="btn btn-primary mt-3 mb-5">Add</button>
                             </div>
                         </form>
 
                         <div className="inputDetails">
                             <div className="taskName">
-                                <h4>{this.state.task}</h4>
-                                <p>{this.state.details}</p>
+                                <h4>{task}</h4>
+                                <p>{details}</p>
                             </div>
                         </div>
                     </div>
