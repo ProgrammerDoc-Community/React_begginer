@@ -3,6 +3,7 @@ import React,{useContext, useEffect, useState} from 'react'
 import {AiOutlineDelete} from 'react-icons/ai'
 import './App.css';
 import { isCompositeComponent } from 'react-dom/test-utils';
+import Registeration from './frontend/register';
 // import React,{useState} from 'react';
 
 function App() {
@@ -31,44 +32,48 @@ function App() {
   },[])
   return (
     <div className="App">
-      <h1>Yika Todos</h1>
-      <div className='todo-wrapper'>
-        <div className='todo-input'>
-          <div className='todo-input-item'>
-            <label>Title</label>
-            <input type='text' value={newTitle} onChange={(e)=>setNewTitle(e.target.value)} placeholder='enter a title'/>
-          </div>
-          <div className='todo-input-item'>
-            <label>Description</label>
-            <input type='text' value={newDescription} onChange={(e)=>setNewDescription(e.target.value)} placeholder='enter a description'/>
-          </div>
-          <div className='todo-input-item'>
-            <button className='primaryBtn' onClick={handleAddTodo}>Add</button>
-          </div>
-        </div>
-        <div className='btn-area'>
-          <button className={`secondaryBtn isCompleteScreen ${isCompleteScreen === false && `active`}`} onClick={()=>setIsCompleteScreen(false)}>Todo</button>
-          <button className={` secondaryBtn isCompleteScreen ${isCompleteScreen === true && `active`}`} onClick={()=>setIsCompleteScreen(true)}>Completed</button>
-        </div>
-        <div className='todo-list'>
-          {allTodos.map((item,index)=>{
-            return(
-              <div className='todo-list-item' key={index}>
-              <h3>{item.title} </h3>
-              <p>{item.description}</p>
-            </div>
-            /* <div>
-              <AiOutlineDelete className="icon"/>
-              <button className="check-icon">D</button>
-            </div> */
-            );
-          }
-            )
-          }
-        </div>
-      </div>
+      <Registeration/>
     </div>
   );
 }
 
 export default App;
+
+// code for todo
+
+      // <h1>Yika Todos</h1>
+      // <div className='todo-wrapper'>
+      //   <div className='todo-input'>
+      //     <div className='todo-input-item'>
+      //       <label>Title</label>
+      //       <input type='text' value={newTitle} onChange={(e)=>setNewTitle(e.target.value)} placeholder='enter a title'/>
+      //     </div>
+      //     <div className='todo-input-item'>
+      //       <label>Description</label>
+      //       <input type='text' value={newDescription} onChange={(e)=>setNewDescription(e.target.value)} placeholder='enter a description'/>
+      //     </div>
+      //     <div className='todo-input-item'>
+      //       <button className='primaryBtn' onClick={handleAddTodo}>Add</button>
+      //     </div>
+      //   </div>
+      //   <div className='btn-area'>
+      //     <button className={`secondaryBtn isCompleteScreen ${isCompleteScreen === false && `active`}`} onClick={()=>setIsCompleteScreen(false)}>Todo</button>
+      //     <button className={` secondaryBtn isCompleteScreen ${isCompleteScreen === true && `active`}`} onClick={()=>setIsCompleteScreen(true)}>Completed</button>
+      //   </div>
+      //   <div className='todo-list'>
+      //     {allTodos.map((item,index)=>{
+      //       return(
+      //         <div className='todo-list-item' key={index}>
+      //         <h3>{item.title} </h3>
+      //         <p>{item.description}</p>
+      //       </div>
+      //       /* <div>
+      //         <AiOutlineDelete className="icon"/>
+      //         <button className="check-icon">D</button>
+      //       </div> */
+      //       );
+      //     }
+      //       )
+      //     }
+      //   </div>
+      // </div>
