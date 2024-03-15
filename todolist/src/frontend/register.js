@@ -1,11 +1,12 @@
 import React,{useState,StyleSheet} from "react";
-
+import { Await, useNavigate } from "react-router-dom";
 
 const Registeration = ()=>{
     const [username,setUsername] = useState('');
     const [email,setEmail] = useState('');
     const [password1,setPassword1] = useState('');
     const [password2,setPassword2] = useState('');
+    const navigate = useNavigate();
 
     const header = {
 
@@ -32,6 +33,12 @@ const Registeration = ()=>{
 
             }
             console.log(email)
+            
+            try{
+                await navigate('/login')
+            }catch(error){
+                console.log('navigation error')
+            }
         }catch(error){
             console.log(error)
 

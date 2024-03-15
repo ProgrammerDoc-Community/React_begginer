@@ -1,18 +1,16 @@
-import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirection
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const LoginView = () => {
+const LoginView = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const [token, setToken] = useState(null);
-  const [error, setError] = useState(null);
-  const navigate = useNavigate(); // Access the navigate function
+  const navigate = useNavigate();
 
-  const clickHandler = async (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
 
     try {
-      const credentials = { username, password }; // Create a more secure object
+      const credentials = { username, password };
 
       const response = await fetch("http://127.0.0.1:8000/api/login/", {
         method: "POST",
@@ -23,36 +21,31 @@ const LoginView = () => {
       });
 
       if (!response.ok) {
-        // Handle non-200 status codes with an error message
         const errorData = await response.json();
-        setError(errorData.message || "Login failed");
-        console.error("Error:", errorData);
-        return; // Exit the function if there's an error
+        console.error("Login error:", errorData);
+        throw new Error(errorData.message || "Login failed");
       }
 
       const data = await response.json();
-      setToken(data.token); // Set token only if login is successful
-      setError(null); // Clear error state on successful login
-      console.log("Login successful! Token:", data.token);
+      localStorage.setItem("token", data.token); // Store token
 
-      // Store token in localStorage for persistence (optional)
-      localStorage.setItem("token", data.token);
-
-      // Redirect to products page after successful login
       try {
         await navigate("/products"); // Redirect to products page
       } catch (error) {
         console.error("Navigation error:", error);
       }
+
+      if (onLoginSuccess) {
+        onLoginSuccess(); // Inform Products.js of successful login (optional)
+      }
     } catch (error) {
-      setError("An error occurred during login. Please try again.");
-      console.error("Error:", error);
+      // Handle error here if needed
     }
   };
 
   return (
     <div>
-      <form onSubmit={clickHandler}>
+      <form onSubmit={handleLogin}>
         <div>
           <label htmlFor="username">Username</label>
           <input
@@ -77,9 +70,6 @@ const LoginView = () => {
           />
         </div>
         <button type="submit">Login</button>
-
-        {token && <p>Token: {token}</p>}
-        {error && <p className="error-message">{error}</p>}
       </form>
     </div>
   );
