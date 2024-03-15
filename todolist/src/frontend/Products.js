@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 
-const ProductList = () => {
+const Products = ({ token }) => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
-  const token = localStorage.getItem("token"); // Get token from localStorage
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -13,33 +11,29 @@ const ProductList = () => {
       setError(null);
 
       try {
-        const response = await fetch("http://127.0.0.1:8000/api/products/", {
+        const response = await fetch("http://your-backend-api/api/products/", {
           headers: {
-            Authorization: `Bearer ${token}`, // Include token in Authorization header
+            Authorization: `Bearer ${token}`,
           },
         });
 
         if (!response.ok) {
-          const errorData = await response.json();
-          setError(errorData.message || "Error fetching products");
-          console.error("Error:", errorData);
-          return;
+            console.log(error)
         }
 
         const data = await response.json();
         setProducts(data);
       } catch (error) {
-        setError("An error occurred while fetching products.");
-        console.error("Error:", error);
-      } finally {
-        setIsLoading(false);
-      }
+        console.error("Error:");
+      } 
     };
 
     if (token) {
       fetchProducts();
-    } // Only fetch if token exists
-  }, [token]); // Re-run useEffect on token change
+    } else {
+      setError("Please log in to view products"); // Handle missing token
+    }
+  }, [token]);
 
   return (
     <div>
@@ -57,4 +51,4 @@ const ProductList = () => {
   );
 };
 
-export default ProductList;
+export default Products;
